@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Lojinha</title>
+    <link rel="stylesheet" href="loja.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+
+    <h1>🛒 Minha Lojinha</h1>
+
+    <h2>Itens no carrinho: <span id="carrinho">0</span></h2>
+
+    <div class="container">
+        <div class="produto">
+            <h3>Tênis Esportivo</h3>
+            <p>R$ 199,90</p>
+            <button onclick="comprar()">Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <h3>Camiseta</h3>
+            <p>R$ 49,90</p>
+            <button onclick="comprar()">Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <h3>Boné</h3>
+            <p>R$ 29,90</p>
+            <button onclick="comprar()">Adicionar</button>
+        </div>
+    </div>
+
+    <button class="finalizar" onclick="finalizarCompra()">Finalizar Compra</button>
+
+    <div id="aviso">Item adicionado!</div>
+    <div id="sucesso">🎉 Compra realizada com sucesso!</div>
+
+    <script>
+        var quantidadeDeItens = 0;
+
+        function comprar() {
+            quantidadeDeItens++;
+            document.getElementById("carrinho").innerText = quantidadeDeItens;
+
+            var aviso = document.getElementById("aviso");
+            aviso.style.display = "block";
+
+            setTimeout(function () {
+                aviso.style.display = "none";
+            }, 1500);
+        }
+
+        function finalizarCompra() {
+            if (quantidadeDeItens === 0) {
+                alert("Adicione pelo menos um item!");
+                return;
+            }
+
+            document.getElementById("sucesso").style.display = "block";
+
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
+
+            quantidadeDeItens = 0;
+            document.getElementById("carrinho").innerText = 0;
+        }
+    </script>
+
+</body>
+</html>
